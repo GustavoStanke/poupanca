@@ -18,18 +18,14 @@ import orgSenac.aula01.repository.RepositoryPoupanca;
 @RequestMapping("/poupanca")
 public class PoupancaController {
 
-    @Autowired
-    private RepositoryPoupanca repository;
+    private final PoupancaService service;
 
-    // Retorna todos os registros de Poupanca
-    @GetMapping
-    public List<modelPoupanca> getAll() {
-        return repository.findAll();
+    public PoupancaController(PoupancaService service) {
+        this.service = service;
     }
 
-    // Salva um novo registro de Poupanca
-    @PostMapping
-    public modelPoupanca save(@RequestBody modelPoupanca poupanca) {
-        return repository.save(poupanca);
+    @GetMapping
+    public List<ModelPoupanca> getAll() {
+        return service.getAllPoupancas();
     }
 }
